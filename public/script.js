@@ -21,11 +21,11 @@ function getAccountPage() {
 
 const routes = {
     '': getBuyPage,
-    '#/buy': getBuyPage,
-    '#/sell': getSellPage,
-    '#/cart': getCartPage,
-    '#/orders': getOrdersPage,
-    '#/account': getAccountPage
+    '/buy': getBuyPage,
+    '/sell': getSellPage,
+    '/cart': getCartPage,
+    '/orders': getOrdersPage,
+    '/account': getAccountPage
 };
 
 const state = {
@@ -41,15 +41,23 @@ function updateState(newState) {
 
 function renderContent() {
     const appDiv = document.getElementById('app');
-    if (state.isLoading) {
-        appDiv.innerHTML = '<div>Loading...</div>';
-        return;
-    }
-    const hash = window.location.hash || '#/buy';
-    appDiv.innerHTML = routes[hash] ? routes[hash]() : '<h1>Page not found</h1>';
+    const path = window.location.pathname;
+    appDiv.innerHTML = routes[path] ? routes[path]() : '<h1>Page not found</h1>';
 }
 
-window.addEventListener('hashchange', renderContent);
+function navigate(path) {
+    window.history.pushState({}, '', path);
+    renderContent();
+}
+
+document.addEventListener('click', (e) => {
+    if (e.target.matches('a[data-link]')) {
+        e.preventDefault();
+        navigate(e.target.getAttribute('href'));
+    }
+});
+
+window.addEventListener('popstate', renderContent);
 window.addEventListener('load', renderContent);
 
 function setupEventListeners() {
