@@ -11,11 +11,11 @@ function getCartPage() {
 }
 
 function getOrdersPage() {
-    return `<h1>My Orders</h1>`;
+    return `<h1>My orders</h1>`;
 }
 
 function getAccountPage() {
-    return `<h1>Your Account</h1>`;
+    return `<h1>Manage account</h1>`;
 }
 
 
