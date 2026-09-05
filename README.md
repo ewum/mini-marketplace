@@ -4,6 +4,7 @@
 - Node.js
 - Express
 - MySQL
+- mysql2
 - JWT
 - Docker
 # How to run
