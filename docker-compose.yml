@@ -10,7 +10,7 @@ services:
       - DB_HOST=db
       - DB_USER=root
       - DB_PASSWORD=1234
-      - DB_NAME=ecommerce
+      - DB_NAME=mydb
       - JWT_SECRET=1234
     depends_on:
       - db
@@ -19,7 +19,7 @@ services:
     image: mysql:8
     environment:
       - MYSQL_ROOT_PASSWORD=1234
-      - MYSQL_DATABASE=ecommerce
+      - MYSQL_DATABASE=mydb
     ports:
       - "3306:3306"
     volumes:
