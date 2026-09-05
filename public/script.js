@@ -19,7 +19,7 @@ function getAccountPage() {
 }
 
 const routes = {
-    '': getBuyPage,
+    '/': getBuyPage,
     '/buy': getBuyPage,
     '/sell': getSellPage,
     '/cart': getCartPage,
