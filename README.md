@@ -1,4 +1,4 @@
-# Simple Ecommerce
+# Mini Marketplace
 # Technologies
 - JavaScript
 - Node.js
