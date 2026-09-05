@@ -18,7 +18,6 @@ function getAccountPage() {
     return `<h1>Manage account</h1>`;
 }
 
-
 const routes = {
     '': getBuyPage,
     '/buy': getBuyPage,
@@ -28,21 +27,10 @@ const routes = {
     '/account': getAccountPage
 };
 
-const state = {
-    users: [],
-    currentPage: 'buy',
-    isLoading: false
-}
-
-function updateState(newState) {
-    Object.assign(state, newState);
-    renderContent();
-}
-
 function renderContent() {
-    const appDiv = document.getElementById('app');
+    const div = document.getElementById('app');
     const path = window.location.pathname;
-    appDiv.innerHTML = routes[path] ? routes[path]() : '<h1>Page not found</h1>';
+    div.innerHTML = routes[path] ? routes[path]() : '<h1>Page not found</h1>';
 }
 
 function navigate(path) {
@@ -60,22 +48,13 @@ document.addEventListener('click', (e) => {
 window.addEventListener('popstate', renderContent);
 window.addEventListener('load', renderContent);
 
-function setupEventListeners() {
-    document.getElementById('app').addEventListener('click', function(event) {
-        if (event.target.matches('.button-submit')) {
-            handleSubmit(event);
-        }
-        if (event.target.matches('.toggle-menu')) {
-            toggleMenu(event);
-        }
-    })
+const state = {
+    users: [],
+    currentPage: 'buy',
+    isLoading: false
 }
 
-function handleSubmit(event) {
-    event.preventDefault();
-    updateState({isLoading: true});
-}
-
-function toggleMenu(event) {
-    document.querySelector('.menu').classList.toggle('active');
+function updateState(newState) {
+    Object.assign(state, newState);
+    renderContent();
 }
