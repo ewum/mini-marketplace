@@ -33,8 +33,8 @@ CREATE TABLE product_questions (
     asker_id INT NOT NULL,
     product_id INT NOT NULL,
     question TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
     answer TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
     answered_at TIMESTAMP,
     FOREIGN KEY (asker_id) REFERENCES users(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
@@ -43,18 +43,13 @@ CREATE TABLE product_questions (
 CREATE TABLE orders (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     buyer_id INT NOT NULL,
-    total DECIMAL(10, 2) NOT NULL,
-    status ENUM('pending', 'paid', 'shipped', 'delivered', 'cancelled') DEFAULT 'pending' NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-    FOREIGN KEY (buyer_id) REFERENCES users(id)
-);
-
-CREATE TABLE order_items (
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    order_id INT NOT NULL,
     product_id INT NOT NULL,
     quantity INT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES orders(id),
+    shipping DECIMAL(10, 2) NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
+    status ENUM('pending', 'paid', 'shipped', 'delivered', 'cancelled') DEFAULT 'pending' NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+    FOREIGN KEY (buyer_id) REFERENCES users(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
