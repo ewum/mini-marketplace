@@ -5,7 +5,9 @@ const authMiddleware = require('../middlewares/authmiddleware');
 
 router.get('/orders', authMiddleware, (req, res) => {
     db.query(
-        'SELECT id, buyer_id, product_id, quantity, created_at, status, total FROM orders WHERE buyer_id = ?',
+        `SELECT id, buyer_id, product_id, quantity, created_at, status, total
+        FROM orders
+        WHERE buyer_id = ?`,
         [req.user.id],
         (err, results) => {
             if (err) return res.status(500).json({error: err.message});
@@ -15,4 +17,4 @@ router.get('/orders', authMiddleware, (req, res) => {
     )
 })
 
-module.exports = router;
+module.exports = router
