@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
-const authmiddleware = require('../middlewares/authmiddleware');
+const authMiddleware = require('../middlewares/authmiddleware');
 
 router.get('/orders', authMiddleware, (req, res) => {
     db.query(
-        'SELECT id, buyer_id, quantity, total FROM orders WHERE buyer_id = ?',
+        'SELECT id, buyer_id, product_id, quantity, created_at, status, total FROM orders WHERE buyer_id = ?',
         [req.user.id],
         (err, results) => {
             if (err) return res.status(500).json({error: err.message});
