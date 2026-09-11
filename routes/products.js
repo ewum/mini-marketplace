@@ -9,4 +9,15 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/:product_id', (req, res) => {
+    const {product_id} = req.params;
+    db.query('SELECT * FROM products WHERE id = ?',
+        [product_id],
+        (err, results) => {
+            if (err) return res.status(500).json({error: err.message});
+            res.json(results[0]);
+        }
+    })
+})
+
 module.exports = router;
