@@ -45,7 +45,6 @@ CREATE TABLE orders (
     buyer_id INT NOT NULL,
     product_id INT NOT NULL,
     quantity INT NOT NULL,
-    price DECIMAL(10, 2) NOT NULL,
     shipping DECIMAL(10, 2) NOT NULL,
     total DECIMAL(10, 2) NOT NULL,
     status ENUM('pending', 'paid', 'shipped', 'delivered', 'cancelled') DEFAULT 'pending' NOT NULL,
