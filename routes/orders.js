@@ -3,19 +3,27 @@ const router = express.Router();
 const db = require('../db');
 const authMiddleware = require('../middlewares/authmiddleware');
 
-router.get('/orders', authMiddleware, (req, res) => {
+router.get('/', authMiddleware, (req, res) => {
     db.query(
         `SELECT p.name, o.quantity, o.total, o.status, o.created_at
         FROM orders o
         JOIN products p ON o.product_id = p.id
-        WHERE buyer_id = ?`,
+        WHERE o.buyer_id = ?`,
         [req.user.id],
         (err, results) => {
             if (err) return res.status(500).json({error: err.message});
             if (results.length == 0) return res.status(404).json({error: 'user not found'});
-            res.json(results[0]);
+            res.json(results);
         }
     )
+})
+
+router.get('/:order_id', authMiddleware, (req, res) => {
+    db.query(
+            `
+            SELECT 
+            WHERE buyer_id =?`
+        )
 })
 
 module.exports = router

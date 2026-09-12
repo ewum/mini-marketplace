@@ -9,6 +9,7 @@ app.use('/api/orders', require('./routes/orders'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/questions', require('./routes/questions'));
 app.use('/api/reviews', require('./routes/reviews'));
+app.use('/api/sales', require('./routes/sales'));
 app.use('/api/users', require('./routes/users'));
 
 app.get('*', (req, res) => {
