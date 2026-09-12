@@ -34,4 +34,21 @@ router.get('/:order_id', authMiddleware, (req, res) => {
 		)
 })
 
+router.post('/:order_id/cancel', authMiddleware, (req, res) => {
+	const {order_id} = req.params;
+	db.query(
+		`UPDATE orders o
+		JOIN products p ON o.product_id = p.id
+		SET o.status = 'cancelled'
+		WHERE o.id = ? AND p.seller_id = ? AND o.status in ('pending', 'paid')`,
+		[order_id, req.user.id],
+		(err, results) => {
+			if (err) return res.status(500).json({error: err.message});
+			if (results.length == 0) return res.status(404).json({'no sale found'});
+			if (results.affectedRows === 0) return res.status(400).json({error: 'order cannot be cancelled'});
+			res.json({message: 'order cancelled'});
+		}	
+	)
+})
+
 module.exports = router;
